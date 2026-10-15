@@ -1,0 +1,20 @@
+---
+- name: Scenario 5 - Manage services (Start/Stop/Restart)
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Ensure Nginx is stopped
+      service:
+        name: nginx
+        state: stopped
+
+    - name: Ensure Nginx is started
+      service:
+        name: nginx
+        state: started
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted

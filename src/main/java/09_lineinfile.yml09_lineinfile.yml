@@ -1,0 +1,16 @@
+---
+- name: Scenario 9 - Replace lines using lineinfile
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Ensure index.html exists with initial content
+      copy:
+        content: "<h1>Old Title</h1>"
+        dest: /var/www/html/index.html
+
+    - name: Replace the title in index.html
+      lineinfile:
+        path: /var/www/html/index.html
+        regexp: '^<h1>.*</h1>'
+        line: '<h1>New Title Updated by Ansible</h1>'

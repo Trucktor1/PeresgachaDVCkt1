@@ -1,0 +1,12 @@
+---
+- name: Scenario 9 (Slide 3) - Configure sysctl parameters
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Set vm.swappiness to 10
+      sysctl:
+        name: vm.swappiness
+        value: '10'
+        state: present
+        reload: yes

@@ -1,0 +1,21 @@
+---
+- name: Scenario 6 - Configure Firewall
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Allow SSH traffic
+      ufw:
+        rule: allow
+        port: '22'
+        proto: tcp
+
+    - name: Allow HTTP traffic
+      ufw:
+        rule: allow
+        port: '80'
+        proto: tcp
+
+    - name: Enable UFW
+      ufw:
+        state: enabled

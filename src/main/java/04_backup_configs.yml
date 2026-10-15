@@ -1,0 +1,17 @@
+---
+- name: Scenario 4 - Backup configuration files
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Create a backup directory
+      file:
+        path: /backup/configs
+        state: directory
+        mode: '0755'
+
+    - name: Copy Nginx config to backup location
+      copy:
+        src: /etc/nginx/nginx.conf
+        dest: /backup/configs/nginx.conf.bak
+        remote_src: yes

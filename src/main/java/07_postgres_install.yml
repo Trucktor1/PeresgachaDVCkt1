@@ -1,0 +1,17 @@
+---
+- name: Scenario 7 - Install and configure PostgreSQL
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Install PostgreSQL
+      apt:
+        name: postgresql
+        state: present
+        update_cache: yes
+
+    - name: Ensure PostgreSQL service is running
+      service:
+        name: postgresql
+        state: started
+        enabled: yes

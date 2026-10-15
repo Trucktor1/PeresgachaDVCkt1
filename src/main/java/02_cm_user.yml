@@ -1,0 +1,14 @@
+---
+- name: Scenario 2 - Add user and set permissions
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Add the user 'newadmin' with a specific password
+      user:
+        name: newadmin
+        password: "{{ '123' | password_hash('sha512') }}"
+        groups: root, sudo
+        append: yes
+        shell: /bin/bash
+        create_home: yes

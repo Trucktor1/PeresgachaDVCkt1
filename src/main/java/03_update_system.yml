@@ -1,0 +1,16 @@
+---
+- name: Scenario 3 - Update all packages and reboot
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Update apt cache and upgrade all packages
+      apt:
+        upgrade: dist
+        update_cache: yes
+
+    - name: Reboot the server
+      reboot:
+        msg: "Reboot initiated by Ansible after system update"
+        connect_timeout: 5
+        reboot_timeout: 600

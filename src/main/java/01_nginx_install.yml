@@ -1,0 +1,25 @@
+---
+- name: Scenario 1 - Install and configure Nginx
+  hosts: webservers
+  become: yes
+
+  tasks:
+    - name: Update apt cache and install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Ensure Nginx is running and enabled on boot
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Create a custom index.html file
+      copy:
+        content: "<h1>Welcome to Ansible Managed Nginx Server</h1>"
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
